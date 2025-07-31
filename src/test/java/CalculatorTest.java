@@ -76,6 +76,6 @@ public class CalculatorTest {
 
         assertThatThrownBy(() -> calculator.div(num1, num2))
                 .isInstanceOf(ArithmeticException.class)
-                .hasMessageContaining("0으로 나눌 수 없습니다.");
+                .hasMessageContaining(Calculator.DIVIDE_BY_ZERO);
     }
 }

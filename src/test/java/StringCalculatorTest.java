@@ -50,7 +50,7 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> stringCalculator.parseNumber(tokens))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("음수는 처리할 수 없습니다.");
+                .hasMessageContaining(StringCalculator.NEGATIVE_NUMBER_NOT_ALLOWED);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> stringCalculator.parseNumber(tokens))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("문자열은 처리할 수 없습니다.");
+                .hasMessageContaining(StringCalculator.INVALID_STRING);
     }
 
     @ParameterizedTest
@@ -83,7 +83,7 @@ public class StringCalculatorTest {
     public void 커스텀_구분자_형식에_맞지_않은_경우_예외_발생(String str) {
         assertThatThrownBy(() -> stringCalculator.calculate(str))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("커스텀 구분자를 찾을 수 없습니다.");
+                .hasMessageContaining(StringCalculator.CUSTOM_DELIMITER_NOT_FOUND);
     }
 
     @ParameterizedTest
@@ -95,7 +95,7 @@ public class StringCalculatorTest {
     public void 문자열이_비어있는_경우_예외_발생(String str) {
         assertThatThrownBy(() -> stringCalculator.calculate(str))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("문자열이 비어있습니다.");
+                .hasMessageContaining(StringCalculator.EMPTY_STRING);
     }
 
     @Test
