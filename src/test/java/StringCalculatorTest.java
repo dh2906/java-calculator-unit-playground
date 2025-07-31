@@ -31,9 +31,9 @@ public class StringCalculatorTest {
             "'//||\n', '||'"
     })
     public void 커스텀_구분자_파싱_테스트(String str, String expected) {
-        String customDelimeter = stringCalculator.findCustomDelimeter(str);
+        String customDelimiter = stringCalculator.findCustomDelimiter(str);
 
-        assertThat(customDelimeter).isEqualTo(expected);
+        assertThat(customDelimiter).isEqualTo(expected);
     }
 
     @Test
