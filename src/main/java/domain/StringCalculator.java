@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+    public static final String EMPTY_STRING = "문자열이 비어있습니다.";
+    public static final String CUSTOM_DELIMITER_NOT_FOUND = "커스텀 구분자를 찾을 수 없습니다.";
+    public static final String NEGATIVE_NUMBER_NOT_ALLOWED = "음수는 처리할 수 없습니다.";
+    public static final String INVALID_STRING = "문자열은 처리할 수 없습니다.";
     private final String delimeterRegex = "[,|:]";
 
     public int calculate(String str) {
@@ -12,7 +16,7 @@ public class StringCalculator {
         String customDelimeter;
 
         if (str == null || str.isBlank()) {
-            throw new RuntimeException("문자열이 비어있습니다.");
+            throw new RuntimeException(EMPTY_STRING);
         }
 
         customDelimeter = findCustomDelimeter(str);
@@ -38,7 +42,7 @@ public class StringCalculator {
         }
 
         if ((startDelimeterIdx == -1) ^ (endDelimeterIdx == -1) || (startDelimeterIdx + 2 == endDelimeterIdx)) {
-            throw new RuntimeException("커스텀 구분자를 찾을 수 없습니다.");
+            throw new RuntimeException(CUSTOM_DELIMITER_NOT_FOUND);
         }
 
         return str.substring(startDelimeterIdx + 2, endDelimeterIdx);
@@ -51,12 +55,12 @@ public class StringCalculator {
                         int number = Integer.parseInt(token.trim());
 
                         if (number < 0) {
-                            throw new RuntimeException("음수는 처리할 수 없습니다.");
+                            throw new RuntimeException(NEGATIVE_NUMBER_NOT_ALLOWED);
                         }
 
                         return number;
                     } catch (NumberFormatException ex) {
-                        throw new RuntimeException("문자열은 처리할 수 없습니다.");
+                        throw new RuntimeException(INVALID_STRING);
                     }
                 })
                 .toList();

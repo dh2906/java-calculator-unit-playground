@@ -1,6 +1,8 @@
 package domain;
 
 public class Calculator {
+    public static final String DIVIDE_BY_ZERO = "0으로 나눌 수 없습니다.";
+
     public int add(int num1, int num2) {
         return Math.addExact(num1, num2);
     }
@@ -15,7 +17,7 @@ public class Calculator {
 
     public int div(int num1, int num2) {
         if (num2 == 0)
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            throw new ArithmeticException(DIVIDE_BY_ZERO);
 
         return num1 / num2;
     }
