@@ -13,22 +13,13 @@ public class StringCalculator {
     private final String delimeterRegex = "[,|:]";
 
     public int calculate(String str) {
-        String[] tokens;
-        String customDelimeter;
-
         if (str == null || str.isBlank()) {
             throw new RuntimeException(EMPTY_STRING);
         }
 
-        customDelimeter = findCustomDelimeter(str);
-
-        if (customDelimeter == null) {
-            tokens = str.split(delimeterRegex);
-        } else {
-            tokens = str.substring(str.indexOf("\n") + 1)
-                        .split(Pattern.quote(customDelimeter));
-        }
-
+        String customDelimeter = findCustomDelimeter(str);
+        String strNumbers = extractNumber(str, customDelimeter);
+        String[] tokens = splitTokens(strNumbers, customDelimeter);
         List<Integer> numbers = parseNumber(tokens);
 
         return add(numbers);
@@ -49,22 +40,40 @@ public class StringCalculator {
         return str.substring(startDelimeterIdx + 2, endDelimeterIdx);
     }
 
+    public String extractNumber(String str, String customDelimeter) {
+        if (customDelimeter != null) {
+            return str.substring(str.indexOf("\n") + 1);
+        }
+
+        return str;
+    }
+
+    public String[] splitTokens(String strNumbers, String customDelimeter) {
+        if (customDelimeter == null) {
+            return strNumbers.split(delimeterRegex);
+        }
+
+        return strNumbers.split(Pattern.quote(customDelimeter));
+    }
+
     public List<Integer> parseNumber(String[] tokens) {
         return Arrays.stream(tokens)
-                .map(token -> {
-                    try {
-                        int number = Integer.parseInt(token.trim());
-
-                        if (number < 0) {
-                            throw new RuntimeException(NEGATIVE_NUMBER_NOT_ALLOWED);
-                        }
-
-                        return number;
-                    } catch (NumberFormatException ex) {
-                        throw new RuntimeException(INVALID_STRING);
-                    }
-                })
+                .map(this::parseTokenToInt)
                 .toList();
+    }
+
+    public int parseTokenToInt(String token) {
+        try {
+            int number = Integer.parseInt(token.trim());
+
+            if (number < 0) {
+                throw new RuntimeException(NEGATIVE_NUMBER_NOT_ALLOWED);
+            }
+
+            return number;
+        } catch (NumberFormatException ex) {
+            throw new RuntimeException(INVALID_STRING);
+        }
     }
 
     public int add(List<Integer> numbers) {
