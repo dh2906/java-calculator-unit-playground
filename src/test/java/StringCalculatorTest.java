@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
+
     private final StringCalculator stringCalculator = new StringCalculator();
 
     @ParameterizedTest

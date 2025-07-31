@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
+
     private final Calculator calculator = new Calculator();
 
     @Test

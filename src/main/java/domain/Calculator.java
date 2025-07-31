@@ -1,6 +1,7 @@
 package domain;
 
 public class Calculator {
+
     public static final String DIVIDE_BY_ZERO = "0으로 나눌 수 없습니다.";
 
     public int add(int num1, int num2) {
