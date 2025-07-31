@@ -1,7 +1,7 @@
 import domain.Calculator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
     private final Calculator calculator = new Calculator();
@@ -12,7 +12,7 @@ public class CalculatorTest {
         final int num2 = 2;
         final int actual = calculator.add(num1, num2);
 
-        assertEquals(num1 + num2, actual);
+        assertThat(actual).isEqualTo(num1 + num2);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class CalculatorTest {
         final int num2 = 2;
         final int actual = calculator.sub(num1, num2);
 
-        assertEquals(num1 - num2, actual);
+        assertThat(actual).isEqualTo(num1 - num2);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class CalculatorTest {
         final int num2 = 2;
         final int actual = calculator.mul(num1, num2);
 
-        assertEquals(num1 * num2, actual);
+        assertThat(actual).isEqualTo(num1 * num2);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class CalculatorTest {
         final int num2 = 2;
         final int actual = calculator.div(num1, num2);
 
-        assertEquals(num1 / num2, actual);
+        assertThat(actual).isEqualTo(num1 / num2);
     }
 
     @Test
@@ -47,7 +47,8 @@ public class CalculatorTest {
         final int num1 = Integer.MAX_VALUE;
         final int num2 = Integer.MAX_VALUE;
 
-        assertThrows(ArithmeticException.class, () -> calculator.add(num1, num2));
+        assertThatThrownBy(() -> calculator.add(num1, num2))
+                .isInstanceOf(ArithmeticException.class);
     }
 
     @Test
@@ -55,7 +56,8 @@ public class CalculatorTest {
         final int num1 = Integer.MIN_VALUE;
         final int num2 = Integer.MAX_VALUE;
 
-        assertThrows(ArithmeticException.class, () -> calculator.sub(num1, num2));
+        assertThatThrownBy(() -> calculator.sub(num1, num2))
+                .isInstanceOf(ArithmeticException.class);
     }
 
     @Test
@@ -63,7 +65,8 @@ public class CalculatorTest {
         final int num1 = Integer.MAX_VALUE;
         final int num2 = Integer.MAX_VALUE;
 
-        assertThrows(ArithmeticException.class, () -> calculator.mul(num1, num2));
+        assertThatThrownBy(() -> calculator.mul(num1, num2))
+                .isInstanceOf(ArithmeticException.class);
     }
 
     @Test
@@ -71,6 +74,8 @@ public class CalculatorTest {
         final int num1 = Integer.MAX_VALUE;
         final int num2 = 0;
 
-        assertThrows(ArithmeticException.class, () -> calculator.div(num1, num2));
+        assertThatThrownBy(() -> calculator.div(num1, num2))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessageContaining("0으로 나눌 수 없습니다.");
     }
 }
