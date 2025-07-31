@@ -9,11 +9,13 @@ public class StringCalculator {
 
     public int calculate(String str) {
         String[] tokens;
-        String customDelimeter = findCustomDelimeter(str);
+        String customDelimeter;
 
         if (str == null || str.isBlank()) {
             throw new RuntimeException("문자열이 비어있습니다.");
         }
+
+        customDelimeter = findCustomDelimeter(str);
 
         if (customDelimeter == null) {
             tokens = str.split(delimeterRegex);
