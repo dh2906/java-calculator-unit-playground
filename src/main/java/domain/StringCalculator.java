@@ -22,7 +22,7 @@ public class StringCalculator {
         String[] tokens = splitTokens(strNumbers, customDelimiter);
         List<Integer> numbers = parseNumber(tokens);
 
-        return add(numbers);
+        return sum(numbers);
     }
 
     public String findCustomDelimiter(String str) {
@@ -76,7 +76,7 @@ public class StringCalculator {
         }
     }
 
-    public int add(List<Integer> numbers) {
+    public int sum(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
