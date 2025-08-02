@@ -1,4 +1,5 @@
 import domain.Calculator;
+import exception.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -77,6 +78,6 @@ public class CalculatorTest {
 
         assertThatThrownBy(() -> calculator.div(num1, num2))
                 .isInstanceOf(ArithmeticException.class)
-                .hasMessageContaining(Calculator.DIVIDE_BY_ZERO);
+                .hasMessageContaining(ErrorMessage.DIVIDE_BY_ZERO);
     }
 }

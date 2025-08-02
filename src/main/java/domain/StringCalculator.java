@@ -1,20 +1,18 @@
 package domain;
 
+import exception.ErrorMessage;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    public static final String NULL_STRING = "문자열에 null값이 전달되었습니다.";
-    public static final String CUSTOM_DELIMITER_NOT_FOUND = "커스텀 구분자를 찾을 수 없습니다.";
-    public static final String NEGATIVE_NUMBER_NOT_ALLOWED = "음수는 처리할 수 없습니다.";
-    public static final String INVALID_STRING = "문자열은 처리할 수 없습니다.";
     private final String delimiterRegex = "[,|:]";
 
     public int calculate(String str) {
         if (str == null) {
-            throw new RuntimeException(NULL_STRING);
+            throw new RuntimeException(ErrorMessage.INVALID_STRING);
         }
 
         if (str.isBlank())
@@ -37,7 +35,7 @@ public class StringCalculator {
         }
 
         if ((startDelimiterIdx == -1) ^ (endDelimiterIdx == -1) || (startDelimiterIdx + 2 == endDelimiterIdx)) {
-            throw new RuntimeException(CUSTOM_DELIMITER_NOT_FOUND);
+            throw new RuntimeException(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND);
         }
 
         return str.substring(startDelimiterIdx + 2, endDelimiterIdx);
@@ -70,12 +68,12 @@ public class StringCalculator {
             int number = Integer.parseInt(token.trim());
 
             if (number < 0) {
-                throw new RuntimeException(NEGATIVE_NUMBER_NOT_ALLOWED);
+                throw new RuntimeException(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED);
             }
 
             return number;
         } catch (NumberFormatException ex) {
-            throw new RuntimeException(INVALID_STRING);
+            throw new RuntimeException(ErrorMessage.INVALID_STRING);
         }
     }
 

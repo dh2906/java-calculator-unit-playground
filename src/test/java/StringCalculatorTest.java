@@ -1,4 +1,5 @@
 import domain.StringCalculator;
+import exception.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -51,7 +52,7 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> stringCalculator.parseNumber(tokens))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining(StringCalculator.NEGATIVE_NUMBER_NOT_ALLOWED);
+                .hasMessageContaining(ErrorMessage.NEGATIVE_NUMBER_NOT_ALLOWED);
     }
 
     @Test
@@ -60,7 +61,7 @@ public class StringCalculatorTest {
 
         assertThatThrownBy(() -> stringCalculator.parseNumber(tokens))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining(StringCalculator.INVALID_STRING);
+                .hasMessageContaining(ErrorMessage.INVALID_STRING);
     }
 
     @ParameterizedTest
@@ -84,7 +85,7 @@ public class StringCalculatorTest {
     public void 커스텀_구분자_형식에_맞지_않은_경우_예외_발생(String str) {
         assertThatThrownBy(() -> stringCalculator.calculate(str))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining(StringCalculator.CUSTOM_DELIMITER_NOT_FOUND);
+                .hasMessageContaining(ErrorMessage.CUSTOM_DELIMITER_NOT_FOUND);
     }
 
     @ParameterizedTest
@@ -92,7 +93,7 @@ public class StringCalculatorTest {
     public void 문자열이_널값인_경우_예외_발생(String str) {
         assertThatThrownBy(() -> stringCalculator.calculate(str))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining(StringCalculator.NULL_STRING);
+                .hasMessageContaining(ErrorMessage.NULL_STRING);
     }
 
     @ParameterizedTest
