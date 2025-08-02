@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private final String delimiterRegex = "[,|:]";
-
     public int calculate(String str) {
         if (str == null) {
             throw new RuntimeException(ErrorMessage.INVALID_STRING);
@@ -50,6 +48,8 @@ public class StringCalculator {
     }
 
     public String[] splitTokens(String strNumbers, String customDelimiter) {
+        String delimiterRegex = "[,|:]";
+
         if (customDelimiter == null) {
             return strNumbers.split(delimiterRegex);
         }
