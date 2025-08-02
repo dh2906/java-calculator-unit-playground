@@ -89,14 +89,21 @@ public class StringCalculatorTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = {
-            "",
-            " "
-    })
-    public void 문자열이_비어있는_경우_예외_발생(String str) {
+    public void 문자열이_널값인_경우_예외_발생(String str) {
         assertThatThrownBy(() -> stringCalculator.calculate(str))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining(StringCalculator.EMPTY_STRING);
+                .hasMessageContaining(StringCalculator.NULL_STRING);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "",
+        " "
+    })
+    public void 문자열이_비어있는_경우_결과값으로_0리턴(String str) {
+        int actual = stringCalculator.calculate(str);
+
+        assertThat(actual).isEqualTo(0);
     }
 
     @Test
