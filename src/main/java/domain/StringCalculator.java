@@ -6,16 +6,19 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    public static final String EMPTY_STRING = "문자열이 비어있습니다.";
+    public static final String NULL_STRING = "문자열에 null값이 전달되었습니다.";
     public static final String CUSTOM_DELIMITER_NOT_FOUND = "커스텀 구분자를 찾을 수 없습니다.";
     public static final String NEGATIVE_NUMBER_NOT_ALLOWED = "음수는 처리할 수 없습니다.";
     public static final String INVALID_STRING = "문자열은 처리할 수 없습니다.";
     private final String delimiterRegex = "[,|:]";
 
     public int calculate(String str) {
-        if (str == null || str.isBlank()) {
-            throw new RuntimeException(EMPTY_STRING);
+        if (str == null) {
+            throw new RuntimeException(NULL_STRING);
         }
+
+        if (str.isBlank())
+            return 0;
 
         String customDelimiter = findCustomDelimiter(str);
         String strNumbers = extractNumber(str, customDelimiter);
