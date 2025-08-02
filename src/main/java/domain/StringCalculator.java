@@ -12,7 +12,7 @@ public class StringCalculator {
 
     public int calculate(String str) {
         if (str == null) {
-            throw new RuntimeException(ErrorMessage.INVALID_STRING);
+            throw new RuntimeException(ErrorMessage.NULL_STRING);
         }
 
         if (str.isBlank())
